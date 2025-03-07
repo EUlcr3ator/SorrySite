@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="main_header">Прости меня, пожалуйста ❤️</h1>
+    <p>Поздравляю с 8 марта! Я бы никогда не хотел тебя чем-то расстроить, и мне очень жаль, что так получилось. Ты для меня всегда будешь самой любимой и самой лучшей <p>❤️❤️❤️</p>
+
+    <div class="button-container" id="buttonContainer">
+        <button class="button" id="forgiveButton" onclick="showGift()">Простишь меня?</button>
+        <img src="resources/chocolate.png" alt="Gift" class="gift-image"> <!-- Replace with your image -->
+    </div>
+
+    <!-- Pop-up message -->
+    <div class="qr-code-link" id="qrcodelink">
+        <image class="qr-code" src="resources/qr-code.png"></image>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s"; 
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 500);
+
+        function showGift() {
+            let buttonContainer = document.getElementById("buttonContainer");
+            let button = document.getElementById("forgiveButton");
+
+            let qrcodelink = document.getElementById("qrcodelink");
+
+            // Toggle class
+            qrcodelink.classList.toggle("clicked");
+            buttonContainer.classList.toggle("clicked");
+
+            // Change button text when clicked
+            if (buttonContainer.classList.contains("clicked")) {
+                button.textContent = "Япиииии";
+                createConfetti();
+            } else {
+                button.textContent = "Простишь меня?";
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+
+                let colors = ["#ff4d4d", "#ffcc00", "#66ccff", "#ff66ff", "#00cc66"];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = "-10px";
+                confetti.style.animationDuration = (Math.random() * 1.5 + 1) + "s";
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 2000); // Remove after animation
+            }
+        }
+    </script>
+
+</body>
+</html>
